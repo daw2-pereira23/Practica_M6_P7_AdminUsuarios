@@ -5,3 +5,7 @@ h1{
 .fila-oculta{
     display: none;
 }
+
+.ver-fila{
+    display: block;
+}

@@ -18,8 +18,10 @@ export const router = {
          document.querySelector('main').innerHTML = admin.template 
          adminUsuarios.detectarEventos()
          Registro.multiAvatar()
-         document.querySelector("#enviar").addEventListener("click", ()=>{
-            Registro.crearUsuario()
+         document.querySelector("#enviar").addEventListener("click", (e)=>{
+
+            Registro.crearUsuario(e)
+            Registro.detectarBoton()
          })
     }
 }

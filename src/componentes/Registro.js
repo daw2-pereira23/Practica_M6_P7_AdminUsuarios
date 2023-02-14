@@ -11,15 +11,9 @@ export const Registro = {
       <div id="inyecttion"></div>
       <h5 class="card-header">Formulario</h5>
         <div class="card-body">
-          <form>
-
+          <form id="formularioRegistro" class="form" novalidate>
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">nombre</label>
-              <input type="text" class="form-control" id="nombre">
-              
-            </div>
-            <div class="mb-3">
-              <label for="text" class="form-label">Nick</label>
+              <label for="text" class="form-labels">Nick</label>
               <input type="text" class="form-control" id="nick">
             </div>
             
@@ -43,29 +37,36 @@ export const Registro = {
     
     
     //Creamos el usuario
-    crearUsuario:()=>{
-
+    crearUsuario:(e)=>{
+      e.preventDefault();
+      console.log("funcionando");
       var usuario = new Object()
       var id = uuidv4()
      
 
-      usuario.password = document.querySelector("#password").value
+      usuario.Password = document.querySelector("#password").value
+      usuario.nick = document.querySelector('#nick').value
+      usuario.email = document.querySelector("#email").value
+      usuario.id = id
       
-      adminUsuarios.array.push(usuario)
+      
       console.log(usuario); 
       //
       var tablaHtml=`
       <td class="border-bottom">${id}</td>
-      <td class="border-bottom">${document.querySelector("#nombre").value}</td>
+      <td class="border-bottom">${document.querySelector("#nick").value}</td>
       <td class="border-bottom">${document.querySelector("#email").value}</td>
       <td class="border-bottom">${usuario.password = document.querySelector("#password").value}</td>
-      <td class="border-bottom "><button class="btn btn-primary editar" data-id="${id}">Editar</button></td>
-      <td class="border-bottom "><button class="btn btn-danger borrar" data-id="${id}">Borrar</button></td>
+      <td class="border-bottom "><button class="btn btn-danger editar" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${id}" data-email="${document.querySelector("#email").value}" data-password="${document.querySelector("#password").value}" data-nick="${document.querySelector("#nick").value}" >Editar</button></td>
+      <td class="border-bottom"><button class="btn btn-danger borrar" data-id="${id}">Borrar</button></td> 
       `
       const tr = document.createElement("tr")
-      tr.innerHTML = tablaHtml
-      document.querySelector('table').append(tr)
+      tr.setAttribute("id",  id)
+      tr.setAttribute("class", usuario.nick)
 
+      document.querySelector('tbody').append(tr)
+      tr.innerHTML = tablaHtml
+      adminUsuarios.array.push(usuario)
     },
 
     //Seleccion avatar
@@ -79,6 +80,14 @@ export const Registro = {
           document.querySelector("#inyecttion").innerHTML = svgCode
       })
       
+    },
+
+    detectarBoton:()=>{
+ 
+      document.querySelector('#enviar').addEventListener("click", (e)=>{
+        e.preventDefault();
+        console.log("detectando");
+      })
     }
     
   }
